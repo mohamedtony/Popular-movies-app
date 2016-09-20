@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:baselineAligned="false"
+    android:divider="?android:dividerHorizontal"
+    android:orientation="horizontal">
+
+    <fragment
+        android:id="@+id/fragment_main_activity"
+        android:name="com.example.android.popularmoviesapp.MovieActivityFragment"
+        android:layout_width="0.0dip"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="65.0dip"
+        android:layout_weight="1.0" />
+
+    <FrameLayout
+        android:id="@+id/movie_detail_container"
+        android:layout_width="0.0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="2.0"
+        android:paddingTop="50.0dip" />
+</LinearLayout>
