@@ -3,11 +3,14 @@ package com.example.android.popularmoviesapp;
 import android.provider.BaseColumns;
 
 /**
- * Created by mohamed tony hammad  on 19-Sep-16.
+ * Created by mohamed tony hammad  on 1-ِSep-16.
  */
 
 //======================>>>> Mohamed Tony Hammad Basha
-public class Favorite_Contract {
+public final class FavoriteContract {
+
+    //// the constructor ////////////////////////////////////////////
+    private FavoriteContract(){}
 
     public static final class FavouritesEntry implements BaseColumns {
 

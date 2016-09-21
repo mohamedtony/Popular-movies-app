@@ -12,4 +12,6 @@
     <string name="pref_sort_by_top_rated" translatable="false">/movie/top_rated</string>
     <string name="pref_sort_favorite_rated" translatable="false">favorite</string>
     <string name="action_share">share</string>
+
+    <string name="strNoRecordsFound"> No Results </string>
 </resources>

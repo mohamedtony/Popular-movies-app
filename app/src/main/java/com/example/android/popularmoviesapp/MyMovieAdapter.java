@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 /**
- * Created by medo on 19-Sep-16.
+ * Created by mohamed tony hammad on 4-Aug-16.
  */
 
 
@@ -24,18 +24,35 @@ public class MyMovieAdapter extends ArrayAdapter<MyMovie> {
         super(context,0,myMovies);
         inflater = LayoutInflater.from(context);
     }
+
+
+    //////////////////////the view holder class ////////////////
+    public class ViewHolder {
+        ImageView imageView;
+    }
+
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         MyMovie myyymovie=getItem(position);
+        ViewHolder myHolder=null;
+
         if (null == convertView) {
+             myHolder=new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.one_movie_item, parent, false);
+            myHolder.imageView=(ImageView) convertView.findViewById(R.id.grid_image);
+            convertView.setTag(myHolder);
         }
-        ImageView imageView=(ImageView) convertView.findViewById(R.id.grid_image);
+        else{
+            myHolder = (ViewHolder) convertView.getTag();
+        }
+
         Picasso
                 .with(getContext())
                 .load("http://image.tmdb.org/t/p/w342/"+myyymovie.movie_Poster)
                 .fit()
-                .into(imageView);
+                .into(myHolder.imageView);
         Log.i(" -----<> ",myyymovie.movie_Poster);
         return convertView;
     }

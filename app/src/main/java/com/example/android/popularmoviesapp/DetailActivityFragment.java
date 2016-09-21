@@ -20,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -52,6 +53,7 @@ public class DetailActivityFragment extends Fragment {
     ArrayList<String> myTrailerList = new ArrayList<>();
     ArrayList<String> myReviewList = new ArrayList<>();
     MyMovie movie;
+    GridView gridView;
 
 
 
@@ -111,13 +113,13 @@ public class DetailActivityFragment extends Fragment {
             star_favorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Favorite_DB fDbHelper = new Favorite_DB(getActivity().getApplicationContext());
+                    FavoriteDb fDbHelper = new FavoriteDb(getActivity().getApplicationContext());
                     final SQLiteDatabase db = fDbHelper.getWritableDatabase();
-                    String[] tableColumns = new String[]{Favorite_Contract.FavouritesEntry.COLUMN_FAVOURITE_ID};
-                    String whereClause = Favorite_Contract.FavouritesEntry.COLUMN_FAVOURITE_ID + " = ?";
+                    String[] tableColumns = new String[]{FavoriteContract.FavouritesEntry.COLUMN_FAVOURITE_ID};
+                    String whereClause = FavoriteContract.FavouritesEntry.COLUMN_FAVOURITE_ID + " = ?";
                     String[] whereArgs = new String[]{movie.movie_id};
                     Cursor c = fDbHelper.getReadableDatabase().query(
-                            Favorite_Contract.FavouritesEntry.TABLE_NAME,
+                            FavoriteContract.FavouritesEntry.TABLE_NAME,
                             tableColumns,
                             whereClause,
                             whereArgs,
@@ -128,16 +130,16 @@ public class DetailActivityFragment extends Fragment {
                     if (c.moveToFirst()) {
                         Snackbar.make(view, movie.movie_Title + " removed from Favourites!", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
-                        whereClause = Favorite_Contract.FavouritesEntry.COLUMN_FAVOURITE_ID + " = ?";
+                        whereClause = FavoriteContract.FavouritesEntry.COLUMN_FAVOURITE_ID + " = ?";
                         whereArgs = new String[]{movie.movie_id};
-                        db.delete(Favorite_Contract.FavouritesEntry.TABLE_NAME, whereClause, whereArgs);
+                        db.delete(FavoriteContract.FavouritesEntry.TABLE_NAME, whereClause, whereArgs);
                         star_favorite.setImageResource(R.drawable.star);
                     } else {
                         Snackbar.make(view, movie.movie_Title + " added to Favourites!", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                         ContentValues favValues = new ContentValues();
-                        favValues.put(Favorite_Contract.FavouritesEntry.COLUMN_FAVOURITE_ID, movie.movie_id);
-                        long _id = db.insert(Favorite_Contract.FavouritesEntry.TABLE_NAME, null, favValues);
+                        favValues.put(FavoriteContract.FavouritesEntry.COLUMN_FAVOURITE_ID, movie.movie_id);
+                        long _id = db.insert(FavoriteContract.FavouritesEntry.TABLE_NAME, null, favValues);
                         star_favorite.setImageResource(R.drawable.fav_star);
                     }
                     c.close();
@@ -153,6 +155,9 @@ public class DetailActivityFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+     /*   gridView=(GridView)getActivity().findViewById(R.id.main_gridview);
+        gridView.setSelection(0);
+        gridView.getSelectedView().setSelected(true);*/
     }
 
     /////// ==============> to share the first trailer <==============/////////////
@@ -289,13 +294,14 @@ public class DetailActivityFragment extends Fragment {
         @Override
         public void onPostExecute(ArrayList<String> trailers) {
             super.onPostExecute(trailers);
+            /// intialize an linear layout //////////////////////////////////////////
+            LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.Linear_Layout);
 
             if (trailers != null) {
                 int numOfTrailer = 0;
 
 
-                /// intialize an linear layout //////////////////////////////////////////
-                LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.Linear_Layout);
+
                 for (final String trailer : trailers) {
                     if (trailer != null) {
                         LinearLayout layout2 = new LinearLayout(getContext());
@@ -447,10 +453,11 @@ public class DetailActivityFragment extends Fragment {
         @Override
         public void onPostExecute(ArrayList<String> reviews) {
             super.onPostExecute(reviews);
+            LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.Linear_Layout);
 
             if (reviews != null) {
 
-                LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.Linear_Layout);
+
                 LinearLayout layout3 = new LinearLayout(getContext());
                 layout3.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 layout3.setOrientation(LinearLayout.VERTICAL);

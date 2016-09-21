@@ -28,26 +28,13 @@ import java.util.ArrayList;
 
 /**
  * A placeholder fragment containing a simple view.
- *
+ * <p>
  * //======================>>>> Mohamed Tony Hammad Basha
  */
 public class MovieActivityFragment extends Fragment {
 
 
-    GridView gridView;
     private MyMovieAdapter myMovieAdapter;
-    String movieTitle;
-    String moviebackdrop;
-    String moviePoster;
-    String moviePreview;
-    String releaseDate;
-    String movieId;
-    String voteAverage;
-    //GridView gridView;
-    //MyMovieAdapter myMovieAdapter;
-    MyMovie[] movies;
-    MyMovie movie;
-
 
 
     public MovieActivityFragment() {
@@ -63,10 +50,16 @@ public class MovieActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_main, container, false);
-        gridView = (GridView) view.findViewById(R.id.main_gridview);
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        GridView gridView = (GridView) view.findViewById(R.id.main_gridview);
         myMovieAdapter = new MyMovieAdapter(getContext(), new ArrayList<MyMovie>());
+
+        ////////////////// this empty view when no favorite movie swlwctw///////////////
+        gridView.setEmptyView(view.findViewById(R.id.empty));
+
         gridView.setAdapter(myMovieAdapter);
+
+
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -90,9 +83,9 @@ public class MovieActivityFragment extends Fragment {
         String sort_by = prefs.getString(getString(R.string.pref_sort_by_key), getString(R.string.pref_sort_by_most_popular));//R.string.pref_sort_by_most_popular
         if (sort_by.equals("favorite")) {
             ArrayList<String> fav_ids = new ArrayList<String>();
-            Favorite_DB fDbHelper = new Favorite_DB(getActivity());
+            FavoriteDb fDbHelper = new FavoriteDb(getActivity());
             Cursor retCursor = fDbHelper.getReadableDatabase().query(
-                    Favorite_Contract.FavouritesEntry.TABLE_NAME,
+                    FavoriteContract.FavouritesEntry.TABLE_NAME,
                     null,
                     null,
                     null,
@@ -114,11 +107,6 @@ public class MovieActivityFragment extends Fragment {
             movieTask.execute(sort_by);
         }
     }
-
-
-
-
-
 
 
     //////////////////=======> Fetch Movies Task <=============////////////////
@@ -209,22 +197,27 @@ public class MovieActivityFragment extends Fragment {
                 // textView.setText(m);
                 JSONArray jsonArray = new JSONArray(m);
                 Log.i(" lenght ----->", String.valueOf(jsonArray.length()));
-                movies = new MyMovie[jsonArray.length()];
+
+                MyMovie[] movies = new MyMovie[jsonArray.length()];
+
+
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject arrObjact = jsonArray.getJSONObject(i);
-                    moviePoster = arrObjact.getString("poster_path");
-                    movieTitle = arrObjact.getString("title");
+                    String moviePoster = arrObjact.getString("poster_path");
+                    String movieTitle = arrObjact.getString("title");
                     //movie.setMovieTitle( movieTitle[i]);release_date
-                    moviebackdrop = arrObjact.getString("backdrop_path");
+                    String moviebackdrop = arrObjact.getString("backdrop_path");
                     //movie.setMoviebackdrop(moviebackdrop[i]);
-                    moviePreview = arrObjact.getString("overview");
+                    String moviePreview = arrObjact.getString("overview");
                     //movie.setMoviePreview(moviePreview[i]);
-                    releaseDate = arrObjact.getString("release_date");
-                    movieId = arrObjact.getString("id");
-                    voteAverage = arrObjact.getString("vote_average");
-                    movie = (new MyMovie(movieId, moviePoster, moviebackdrop, movieTitle, moviePreview, releaseDate, voteAverage));
+                    String releaseDate = arrObjact.getString("release_date");
+                    String movieId = arrObjact.getString("id");
+                    String voteAverage = arrObjact.getString("vote_average");
+                    MyMovie movie = (new MyMovie(movieId, moviePoster, moviebackdrop, movieTitle, moviePreview, releaseDate, voteAverage));
                     movies[i] = movie;
                 }
+
+
                 return movies;
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -246,13 +239,12 @@ public class MovieActivityFragment extends Fragment {
     }
 
 
-
     //////////////////=======> Fetch Movies By id Task <=============////////////////
     public class FetchMoviesById extends AsyncTask<ArrayList<String>, Void, ArrayList<MyMovie>> {
         private final String LOG_TAG = FetchMoviesById.class.getSimpleName();
 
         @Override
-        protected  ArrayList<MyMovie> doInBackground(ArrayList<String>... params) {
+        protected ArrayList<MyMovie> doInBackground(ArrayList<String>... params) {
             // These two need to be declared outside the try/catch
             // so that they can be closed in the finally block.
             HttpURLConnection urlConnection = null;
@@ -317,7 +309,7 @@ public class MovieActivityFragment extends Fragment {
                 }
                 try {
                     //////////////////////////////////
-                    MyMovie movie1= getDataMovieFroJson(movieJsonStr);
+                    MyMovie movie1 = getDataMovieFroJson(movieJsonStr);
                     movies.add(movie1);
                 } catch (Exception e) {
                     Log.e(LOG_TAG, e.getMessage(), e);
@@ -327,6 +319,7 @@ public class MovieActivityFragment extends Fragment {
             }
             return movies;
         }
+
         private MyMovie getDataMovieFroJson(String MovieData) {
             // ArrayList<MyMovie> movies = new ArrayList<MyMovie>();
             try {
@@ -351,6 +344,7 @@ public class MovieActivityFragment extends Fragment {
             }
             return null;
         }
+
         @Override
         public void onPostExecute(ArrayList<MyMovie> movies) {
             //super.onPostExecute(movies);
