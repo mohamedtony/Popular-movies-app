@@ -160,9 +160,6 @@ public class DetailActivityFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-     /*   gridView=(GridView)getActivity().findViewById(R.id.main_gridview);
-        gridView.setSelection(0);
-        gridView.getSelectedView().setSelected(true);*/
     }
 
     /////// ==============> to share the first trailer <==============/////////////

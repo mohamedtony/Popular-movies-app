@@ -37,8 +37,7 @@ public class MyMovieAdapter extends ArrayAdapter<MyMovie> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        MyMovie myyymovie=new MyMovie();
-      myyymovie=getItem(position);
+        MyMovie myyymovie=getItem(position);
         ViewHolder myHolder=null;
 
         if (null == convertView) {

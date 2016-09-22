@@ -42,7 +42,6 @@ public class MovieActivityFragment extends Fragment {
 
     private MyMovieAdapter myMovieAdapter;
 
-
     public MovieActivityFragment() {
     }
 
@@ -57,8 +56,12 @@ public class MovieActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+
+
         GridView gridView = (GridView) view.findViewById(R.id.main_gridview);
         myMovieAdapter = new MyMovieAdapter(getContext(), new ArrayList<MyMovie>());
+
+
 
         ////////////////// this empty view when no favorite movie swlwctw///////////////
         gridView.setEmptyView(view.findViewById(R.id.empty));
@@ -70,17 +73,15 @@ public class MovieActivityFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 MyMovie movie = myMovieAdapter.getItem(i);
-                /*Intent intent = new Intent(getContext(), DetailActivity.class);
-                intent.putExtra(" Movie ",movie);
-                startActivity(intent);*/
+
                 ((MovieCallback) getActivity())
                         .on_MovieSelected(movie);
+
             }
         });
 
         return view;
     }
-
 
     @Override
     public void onStart() {
