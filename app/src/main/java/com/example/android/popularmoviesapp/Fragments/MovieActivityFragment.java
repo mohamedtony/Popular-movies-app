@@ -1,4 +1,4 @@
-package com.example.android.popularmoviesapp;
+package com.example.android.popularmoviesapp.Fragments;
 
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -14,6 +14,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.example.android.popularmoviesapp.BuildConfig;
+import com.example.android.popularmoviesapp.DataBase.FavoriteContract;
+import com.example.android.popularmoviesapp.DataBase.FavoriteDb;
+import com.example.android.popularmoviesapp.MovieShape.MyMovie;
+import com.example.android.popularmoviesapp.R;
+import com.example.android.popularmoviesapp.adapter.MyMovieAdapter;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,7 +35,6 @@ import java.util.ArrayList;
 
 /**
  * A placeholder fragment containing a simple view.
- * <p>
  * //======================>>>> Mohamed Tony Hammad Basha
  */
 public class MovieActivityFragment extends Fragment {

@@ -1,4 +1,4 @@
-package com.example.android.popularmoviesapp;
+package com.example.android.popularmoviesapp.Activity;
 
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -6,6 +6,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
+import com.example.android.popularmoviesapp.R;
 
 
 //======================>>>> Mohamed Tony Hammad Basha

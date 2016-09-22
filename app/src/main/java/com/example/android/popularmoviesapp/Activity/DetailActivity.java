@@ -1,7 +1,11 @@
-package com.example.android.popularmoviesapp;
+package com.example.android.popularmoviesapp.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.example.android.popularmoviesapp.Fragments.DetailActivityFragment;
+import com.example.android.popularmoviesapp.R;
+
 //======================>>>> Mohamed Tony Hammad Basha
 public class DetailActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.android.popularmoviesapp;
+package com.example.android.popularmoviesapp.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,12 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
+import com.example.android.popularmoviesapp.MovieShape.MyMovie;
+import com.example.android.popularmoviesapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 /**
- * Created by mohamed tony hammad on 4-Aug-16.
+ * Created by medo on 19-Sep-16.
  */
 
 
@@ -35,7 +37,8 @@ public class MyMovieAdapter extends ArrayAdapter<MyMovie> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        MyMovie myyymovie=getItem(position);
+        MyMovie myyymovie=new MyMovie();
+      myyymovie=getItem(position);
         ViewHolder myHolder=null;
 
         if (null == convertView) {

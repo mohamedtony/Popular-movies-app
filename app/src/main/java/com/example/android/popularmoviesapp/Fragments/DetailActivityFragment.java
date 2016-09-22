@@ -1,4 +1,4 @@
-package com.example.android.popularmoviesapp;
+package com.example.android.popularmoviesapp.Fragments;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -25,6 +25,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.android.popularmoviesapp.BuildConfig;
+import com.example.android.popularmoviesapp.DataBase.FavoriteContract;
+import com.example.android.popularmoviesapp.DataBase.FavoriteDb;
+import com.example.android.popularmoviesapp.MovieShape.MyMovie;
+import com.example.android.popularmoviesapp.R;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;

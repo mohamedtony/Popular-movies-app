@@ -1,4 +1,4 @@
-package com.example.android.popularmoviesapp;
+package com.example.android.popularmoviesapp.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +8,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.example.android.popularmoviesapp.Fragments.DetailActivityFragment;
+import com.example.android.popularmoviesapp.Fragments.MovieActivityFragment;
+import com.example.android.popularmoviesapp.MovieShape.MyMovie;
+import com.example.android.popularmoviesapp.R;
+
 
 //======================>>>> Mohamed Tony Hammad Basha
 
-public class MainActivity extends AppCompatActivity implements MovieActivityFragment.MovieCallback{
+public class MainActivity extends AppCompatActivity implements MovieActivityFragment.MovieCallback {
 
     private  boolean mTwoPane;
     @Override

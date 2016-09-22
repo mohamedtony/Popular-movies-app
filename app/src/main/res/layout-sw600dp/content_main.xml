@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/fragment_main_activity"
-        android:name="com.example.android.popularmoviesapp.MovieActivityFragment"
+        android:name="com.example.android.popularmoviesapp.Fragments.MovieActivityFragment"
         android:layout_width="0.0dip"
         android:layout_height="fill_parent"
         android:layout_marginTop="65.0dip"
